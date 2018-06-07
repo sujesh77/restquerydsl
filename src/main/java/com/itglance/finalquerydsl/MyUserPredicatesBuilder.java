@@ -4,6 +4,7 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class MyUserPredicatesBuilder {
     private List<SearchCriteria> params;
@@ -20,18 +21,13 @@ public class MyUserPredicatesBuilder {
     }
 
     public BooleanExpression build() {
-        if (params.size() == 0) {
+        if (params.isEmpty()) {
             return null;
         }
-
         List<BooleanExpression> predicates = new ArrayList<>();
-        MyUserPredicate predicate;
         for (SearchCriteria param : params) {
-            predicate = new MyUserPredicate(param);
-            BooleanExpression exp = predicate.getPredicate();
-            if (exp != null) {
-                predicates.add(exp);
-            }
+            Optional<BooleanExpression> exp = MyUserPredicate.getPredicate(param);
+            exp.ifPresent(predicates::add);
         }
 
         BooleanExpression result = predicates.get(0);

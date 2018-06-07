@@ -4,19 +4,12 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.NumberPath;
 import com.querydsl.core.types.dsl.PathBuilder;
 import com.querydsl.core.types.dsl.StringPath;
-import org.springframework.util.NumberUtils;
 
-import static org.hibernate.query.criteria.internal.ValueHandlerFactory.isNumeric;
+import java.util.Optional;
 
 public class MyUserPredicate {
 
-    private final SearchCriteria criteria;
-
-    public MyUserPredicate(SearchCriteria criteria) {
-        this.criteria = criteria;
-    }
-
-    public BooleanExpression getPredicate() {
+    public static Optional<BooleanExpression> getPredicate(SearchCriteria criteria) {
         PathBuilder<User> entityPath = new PathBuilder<>(User.class, "user");
 
         if (isNumeric(criteria.getValue().toString())) {
@@ -24,23 +17,27 @@ public class MyUserPredicate {
             int value = Integer.parseInt(criteria.getValue().toString());
             switch (criteria.getOperation()) {
                 case ":":
-                    return path.eq(value);
+                    return Optional.of(path.eq(value));
                 case ">":
-                    return path.goe(value);
+                    return Optional.of(path.goe(value));
                 case "<":
-                    return path.loe(value);
+                    return Optional.of(path.loe(value));
             }
-        }
-        else {
+        } else {
             StringPath path = entityPath.getString(criteria.getKey());
             if (criteria.getOperation().equalsIgnoreCase(":")) {
-                return path.containsIgnoreCase(criteria.getValue().toString());
+                return Optional.of(path.eq(criteria.getValue().toString()));}
+             if (criteria.getOperation().equalsIgnoreCase("~")) {
+                return Optional.of(path.containsIgnoreCase(criteria.getValue().toString()));
             }
-        }
-        return null;
+
+            }
+
+        return Optional.empty();
     }
 
-    public boolean isNumeric(String s) {
+    private static boolean isNumeric(String s) {
+
         return s != null && s.matches("[-+]?\\d*\\.?\\d+");
     }
 }

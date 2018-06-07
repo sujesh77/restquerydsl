@@ -30,7 +30,7 @@ public class UserController {
         MyUserPredicatesBuilder builder = new MyUserPredicatesBuilder();
 
         if (search != null) {
-            Pattern pattern = Pattern.compile("(\\w+?)(:|<|>)(\\w+?),");
+            Pattern pattern = Pattern.compile("(\\w+?)(:|<|>|~)(\\w+?),");
 
             Matcher matcher = pattern.matcher(search + ",");
             while (matcher.find()) {
