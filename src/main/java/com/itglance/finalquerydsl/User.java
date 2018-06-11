@@ -1,9 +1,8 @@
 package com.itglance.finalquerydsl;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 public class User {
@@ -15,8 +14,18 @@ public class User {
     private String firstname;
     private String lastname;
     private String email;
-
     private int age;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Location> location = new LinkedList<>();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getFirstname() {
         return firstname;
@@ -48,5 +57,13 @@ public class User {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public List<Location> getLocation() {
+        return location;
+    }
+
+    public void setLocation(List<Location> location) {
+        this.location = location;
     }
 }

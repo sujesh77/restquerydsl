@@ -1,21 +1,30 @@
 package com.itglance.finalquerydsl;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.EntityPathBase;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class MyUserPredicatesBuilder {
+    private final Class classType;
+    private final EntityPathBase entityPathBase;
+
     private List<SearchCriteria> params;
 
-    public MyUserPredicatesBuilder() {
+    MyUserPredicatesBuilder(Class parameterizedClass, EntityPathBase entityPathBase) {
         params = new ArrayList<>();
+        this.entityPathBase = entityPathBase;
+        this.classType = parameterizedClass;
+    }
+
+    public static MyUserPredicatesBuilder forClass(Class parameterizedClass, EntityPathBase entityPathBase) {
+        return new MyUserPredicatesBuilder(parameterizedClass, entityPathBase);
     }
 
     public MyUserPredicatesBuilder with(
             String key, String operation, Object value) {
-
         params.add(new SearchCriteria(key, operation, value));
         return this;
     }
@@ -26,14 +35,12 @@ public class MyUserPredicatesBuilder {
         }
         List<BooleanExpression> predicates = new ArrayList<>();
         for (SearchCriteria param : params) {
-            Optional<BooleanExpression> exp = MyUserPredicate.getPredicate(param);
+            Optional<BooleanExpression> exp = MyUserPredicate.forClass(classType, entityPathBase).getPredicate(param);
             exp.ifPresent(predicates::add);
         }
 
-        BooleanExpression result = predicates.get(0);
-        for (int i = 1; i < predicates.size(); i++) {
-            result = result.and(predicates.get(i));
-        }
-        return result;
+        Optional<BooleanExpression> expression = predicates.stream().reduce(BooleanExpression::and);
+
+        return expression.get();
     }
 }
