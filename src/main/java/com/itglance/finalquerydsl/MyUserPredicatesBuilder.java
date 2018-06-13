@@ -15,8 +15,9 @@ public class MyUserPredicatesBuilder {
 
     MyUserPredicatesBuilder(Class parameterizedClass, EntityPathBase entityPathBase) {
         params = new ArrayList<>();
-        this.entityPathBase = entityPathBase;
         this.classType = parameterizedClass;
+        this.entityPathBase = entityPathBase;
+
     }
 
     public static MyUserPredicatesBuilder forClass(Class parameterizedClass, EntityPathBase entityPathBase) {

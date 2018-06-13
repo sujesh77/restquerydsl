@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Location {
+public class Location extends BaseModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

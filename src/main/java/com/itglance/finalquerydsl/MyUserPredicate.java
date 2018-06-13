@@ -41,7 +41,7 @@ public class MyUserPredicate<T extends EntityPathBase> {
                 return Optional.of(path.eq(criteria.getValue().toString()));
             }
             if (criteria.getOperation().equalsIgnoreCase("~")) {
-                return Optional.of(path.containsIgnoreCase(criteria.getValue().toString()));
+                return Optional.of(path.like(criteria.getValue().toString()));
             }
 
         }

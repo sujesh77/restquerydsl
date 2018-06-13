@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Entity
-public class User {
+public class User extends BaseModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
