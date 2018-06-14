@@ -1,9 +1,8 @@
-package com.itglance.finalquerydsl;
+package com.itglance.finalquerydsl.repository;
 
+import com.itglance.finalquerydsl.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
-import org.springframework.data.querydsl.binding.QuerydslPredicate;
-import org.springframework.stereotype.Repository;
 
 
 public interface UserRepository extends JpaRepository<User, Long>, QuerydslPredicateExecutor<User> {

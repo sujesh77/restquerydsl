@@ -1,5 +1,6 @@
-package com.itglance.finalquerydsl;
+package com.itglance.finalquerydsl.repository;
 
+import com.itglance.finalquerydsl.model.Location;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 

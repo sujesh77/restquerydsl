@@ -1,5 +1,7 @@
-package com.itglance.finalquerydsl;
+package com.itglance.finalquerydsl.controller;
 
+import com.itglance.finalquerydsl.predicate.MyUserPredicatesBuilder;
+import com.itglance.finalquerydsl.model.BaseModel;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.EntityPathBase;
 import org.springframework.data.jpa.repository.JpaRepository;

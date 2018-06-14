@@ -1,4 +1,4 @@
-package com.itglance.finalquerydsl;
+package com.itglance.finalquerydsl.predicate;
 
 public class SearchCriteria {
     private String key;

@@ -1,8 +1,13 @@
-package com.itglance.finalquerydsl;
+package com.itglance.finalquerydsl.controller;
 
 
+import com.itglance.finalquerydsl.model.QLocation;
+import com.itglance.finalquerydsl.model.QUser;
+import com.itglance.finalquerydsl.repository.LocationRepository;
+import com.itglance.finalquerydsl.repository.UserRepository;
+import com.itglance.finalquerydsl.model.Location;
+import com.itglance.finalquerydsl.model.User;
 import com.querydsl.core.types.Predicate;
-import com.querydsl.core.types.dsl.BooleanExpression;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.web.bind.annotation.*;
 

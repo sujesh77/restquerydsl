@@ -1,4 +1,4 @@
-package com.itglance.finalquerydsl;
+package com.itglance.finalquerydsl.model;
 
 import javax.persistence.*;
 import java.util.LinkedList;

@@ -1,11 +1,6 @@
-package com.itglance.finalquerydsl;
-
-import com.sun.javafx.beans.IDProperty;
+package com.itglance.finalquerydsl.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 @Entity
 public class Location extends BaseModel {

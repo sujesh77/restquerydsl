@@ -1,4 +1,4 @@
-package com.itglance.finalquerydsl;
+package com.itglance.finalquerydsl.predicate;
 
 import com.querydsl.core.types.PathMetadata;
 import com.querydsl.core.types.dsl.*;

@@ -1,4 +1,4 @@
-package com.itglance.finalquerydsl;
+package com.itglance.finalquerydsl.predicate;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.EntityPathBase;
