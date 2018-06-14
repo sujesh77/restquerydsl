@@ -7,7 +7,7 @@ import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class UserController extends BaseResource<User, UserRepository> {
+public class UserController extends BaseResource {
 
     private final UserRepository userRepository;
     private final LocationRepository locationRepository;
@@ -33,8 +33,7 @@ public class UserController extends BaseResource<User, UserRepository> {
     @RequestMapping(method = RequestMethod.GET, value = "/location")
     @ResponseBody
     public Iterable<Location> searchLocation(@RequestParam(value = "search") String search) {
-  //      return search(search, Location.class, QLocation.location ,locationRepository);
-        return null;
+        return search(search, Location.class, QLocation.location, locationRepository);
 
     }
 
