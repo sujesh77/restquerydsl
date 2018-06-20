@@ -5,19 +5,19 @@ import com.querydsl.core.types.dsl.*;
 
 import java.util.Optional;
 
-public class MyUserPredicate<T extends EntityPathBase> {
+public class UserPredicate<T extends EntityPathBase> {
 
     private Class<T> classType;
     private final PathMetadata metaData;
 
-    MyUserPredicate(Class parameterizedClass, EntityPathBase entityPathBase) {
+    UserPredicate(Class parameterizedClass, EntityPathBase entityPathBase) {
 
         this.metaData = entityPathBase.getMetadata();
         this.classType = parameterizedClass;
     }
 
-    public static MyUserPredicate forClass(Class parameterizedClass, EntityPathBase entityPathBase) {
-        return new MyUserPredicate(parameterizedClass, entityPathBase);
+    public static UserPredicate forClass(Class parameterizedClass, EntityPathBase entityPathBase) {
+        return new UserPredicate(parameterizedClass, entityPathBase);
     }
 
     public Optional<BooleanExpression> getPredicate(SearchCriteria criteria) {

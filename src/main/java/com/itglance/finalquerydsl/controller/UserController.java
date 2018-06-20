@@ -1,26 +1,23 @@
 package com.itglance.finalquerydsl.controller;
 
 
-import com.itglance.finalquerydsl.model.QLocation;
 import com.itglance.finalquerydsl.model.QUser;
-import com.itglance.finalquerydsl.repository.LocationRepository;
-import com.itglance.finalquerydsl.repository.UserRepository;
-import com.itglance.finalquerydsl.model.Location;
 import com.itglance.finalquerydsl.model.User;
+import com.itglance.finalquerydsl.repository.UserRepository;
 import com.querydsl.core.types.Predicate;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class UserController extends BaseResource {
+public class UserController extends BaseController<User, UserRepository> {
 
     private final UserRepository userRepository;
-    private final LocationRepository locationRepository;
 
-    public UserController(UserRepository userRepository, LocationRepository locationRepository) {
+    public UserController(UserRepository userRepository) {
+        super(User.class, QUser.user, userRepository);
         this.userRepository = userRepository;
-        this.locationRepository = locationRepository;
     }
+
 
     @RequestMapping(method = RequestMethod.GET, value = "/users")
     @ResponseBody
@@ -30,16 +27,10 @@ public class UserController extends BaseResource {
 
     @RequestMapping(method = RequestMethod.GET, value = "/myusers")
     @ResponseBody
-    public Iterable<User> search(@RequestParam(value = "search") String search) {
-        return search(search, User.class, QUser.user, userRepository);
+    public Iterable<User> search(@QuerydslPredicate @RequestParam(value = "search") String search) {
+        return super.search(search);
     }
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/location")
-    @ResponseBody
-    public Iterable<Location> searchLocation(@RequestParam(value = "search") String search) {
-        return search(search, Location.class, QLocation.location, locationRepository);
-
-    }
 
 }

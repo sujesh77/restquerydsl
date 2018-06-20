@@ -5,14 +5,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Entity
-public class User extends BaseModel{
+public class User extends BaseModel {
 
     private String firstname;
     private String lastname;
     private String email;
     private int age;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user")
     private List<Location> location = new LinkedList<>();
 
     public String getFirstname() {
@@ -47,11 +47,4 @@ public class User extends BaseModel{
         this.age = age;
     }
 
-    public List<Location> getLocation() {
-        return location;
-    }
-
-    public void setLocation(List<Location> location) {
-        this.location = location;
-    }
 }

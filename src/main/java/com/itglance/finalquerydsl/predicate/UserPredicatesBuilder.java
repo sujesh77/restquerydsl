@@ -7,24 +7,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class MyUserPredicatesBuilder {
+public class UserPredicatesBuilder {
     private final Class classType;
     private final EntityPathBase entityPathBase;
 
     private List<SearchCriteria> params;
 
-    MyUserPredicatesBuilder(Class parameterizedClass, EntityPathBase entityPathBase) {
+    UserPredicatesBuilder(Class parameterizedClass, EntityPathBase entityPathBase) {
         params = new ArrayList<>();
         this.classType = parameterizedClass;
         this.entityPathBase = entityPathBase;
 
     }
 
-    public static MyUserPredicatesBuilder forClass(Class parameterizedClass, EntityPathBase entityPathBase) {
-        return new MyUserPredicatesBuilder(parameterizedClass, entityPathBase);
+    public static UserPredicatesBuilder forClass(Class parameterizedClass, EntityPathBase entityPathBase) {
+        return new UserPredicatesBuilder(parameterizedClass, entityPathBase);
     }
 
-    public MyUserPredicatesBuilder with(
+    public UserPredicatesBuilder with(
             String key, String operation, Object value) {
         params.add(new SearchCriteria(key, operation, value));
         return this;
@@ -36,7 +36,7 @@ public class MyUserPredicatesBuilder {
         }
         List<BooleanExpression> predicates = new ArrayList<>();
         for (SearchCriteria param : params) {
-            Optional<BooleanExpression> exp = MyUserPredicate.forClass(classType, entityPathBase).getPredicate(param);
+            Optional<BooleanExpression> exp = UserPredicate.forClass(classType, entityPathBase).getPredicate(param);
             exp.ifPresent(predicates::add);
         }
 
